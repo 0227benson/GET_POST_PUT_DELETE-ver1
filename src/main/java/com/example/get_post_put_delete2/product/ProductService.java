@@ -19,12 +19,10 @@ public class ProductService {
     }
 
     public Product getProduct(String id) {
-        for (Product product : products) {
-            if (product.getId().equals(id)) {
-                return product;
-            }
-        }
-        return null;
+        return products.stream()
+                .filter(product -> id.equals(product.getId()))
+                .findFirst()
+                .orElse(null);
     }
 
     public void addProduct(Product product) {
@@ -32,14 +30,15 @@ public class ProductService {
     }
 
     public void updateProduct(String id, Product updatedProduct) {
-        for (Product product : products) {
-            if (product.getId().equals(id)) {
-                product.setName(updatedProduct.getName());
-                product.setAge(updatedProduct.getAge());
-                break;
-            }
-        }
+        products.stream()
+                .filter(product -> product.getId().equals(id))
+                .findFirst()
+                .ifPresent(product -> {
+                    product.setName(updatedProduct.getName());
+                    product.setAge(updatedProduct.getAge());
+                });
     }
+
 
     public void deleteProduct(String id) {
         products.removeIf(product -> product.getId().equals(id));
