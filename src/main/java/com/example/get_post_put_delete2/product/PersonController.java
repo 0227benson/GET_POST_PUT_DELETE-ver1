@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "api/project")/*URL Path*/
-public class ProductController {
+public class PersonController {
 
-    private  final ProductService productService;
+    private  final PersonService productService;
 
     @Autowired/*自動注入另一個Bean*/
-    public ProductController(ProductService productService) {/*將ProductService自動注入到ProductController*/
+    public PersonController(PersonService productService) {/*將ProductService自動注入到ProductController*/
 
         this.productService = productService;
     }
 
     @GetMapping("/{id}")/*傳入參數id*/
-    public ResponseEntity<Product> getProduct(@PathVariable String id) {
-        Product product = productService.getProduct(id);
+    public ResponseEntity<Person> getProduct(@PathVariable String id) {
+        Person product = productService.getProduct(id);
         if (product != null) {
             return ResponseEntity.ok(product);
         } else {
@@ -29,13 +29,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addProduct(@RequestBody Product product) {
+    public ResponseEntity<Void> addProduct(@RequestBody Person product) {
         productService.addProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }/*當成功添加後，回傳狀態碼201表示成功創建資源。*/
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateProduct(@PathVariable String id, @RequestBody Product updatedProduct) {
+    public ResponseEntity<Void> updateProduct(@PathVariable String id, @RequestBody Person updatedProduct) {
         productService.updateProduct(id, updatedProduct);
         return ResponseEntity.ok().build();
     }/*更新資料後，回傳200表示更新完成*/
