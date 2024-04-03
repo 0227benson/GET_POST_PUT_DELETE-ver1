@@ -27,7 +27,7 @@ public class ProductService {
 
     public void addProduct(Product product) {
 
-        products.add(product);/*將傳入的參數product新增到products列表中*/
+        products.add(product);/*接收一個json格式的資料並將其新增到products列表中*/
     }
 
     public void updateProduct(String id, Product updatedProduct) {
