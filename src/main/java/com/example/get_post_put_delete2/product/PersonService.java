@@ -1,6 +1,5 @@
 package com.example.get_post_put_delete2.product;
 
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,18 +27,18 @@ public class PersonService {
         boolean status = false;
         if (person.isValid()) {
             status = true;
-            people.add(person);/*接收一個json格式的資料並將其新增到products列表中*/
+            people.add(person);/*接收一個json格式的資料並將其新增到products列表中*/}
         return status;
 
     }
 
-    public void updatePerson(String id, Person updatedPerson) {
+    public void updatePerson(String id, Person updatePerson) {
         people.stream()
                 .filter(person -> person.getId().equals(id))
                 .findFirst()
                 .ifPresent(person -> {
-                    person.setName(updatedPerson.getName());
-                    person.setAge(updatedPerson.getAge());
+                    person.setName(updatePerson.getName());
+                    person.setAge(updatePerson.getAge());
                 });/*根據傳入的參數id，找到product中對應的id資料，並將原本的資料更改為傳入的資料*/
     }
 

@@ -2,7 +2,6 @@ package com.example.get_post_put_delete2.product;
 
 import com.example.get_post_put_delete2.Response.Common_Response;
 import com.example.get_post_put_delete2.Response.Get_Api_Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +40,8 @@ public class PersonController {
     }
 
     @PutMapping("/updatePerson/{id}")
-    public ResponseEntity updatePerson(@PathVariable String id, @RequestBody Person updatedPerson) {
-        PERSON_SERVICE.updatePerson(id, updatedPerson);
+    public ResponseEntity updatePerson(@PathVariable String id, @RequestBody Person updatePerson) {
+        PERSON_SERVICE.updatePerson(id, updatePerson);
         return ResponseEntity.ok().build();
     }/*更新資料後，回傳200表示更新完成*/
 
