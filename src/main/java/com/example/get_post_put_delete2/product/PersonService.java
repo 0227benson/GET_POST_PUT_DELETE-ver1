@@ -24,7 +24,7 @@ public class PersonService {
                 .orElse(null);/*如果都沒有符合的product則回傳null*/
     }
 
-    public void addPerson(Person person) {
+    public boolean addPerson(Person person) {
         boolean status = false;
         if (person.isValid()) {
             status = true;

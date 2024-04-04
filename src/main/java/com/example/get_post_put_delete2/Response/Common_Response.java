@@ -22,11 +22,18 @@ public class Common_Response {
 
     public void SUCCESS() {
         this.rsp_code = 200;
+        this.rsp_code = 201;
         this.rsp_msg = "success";
     }
 
     public void FAIL() {
         this.rsp_code = 400;
+        this.rsp_code = 404;
         this.rsp_msg = "Something happened";
+    }
+
+    public void BAD_PARAM() {
+        this.rsp_code = 500;
+        this.rsp_msg = "Parameter error";
     }
 }
