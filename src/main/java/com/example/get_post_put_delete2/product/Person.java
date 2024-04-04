@@ -3,10 +3,10 @@ package com.example.get_post_put_delete2.product;
 public class Person {
     private String id;
     private String name;
-    private Integer age;/*定義屬性名稱和資料型態*/
+    private int age;/*定義屬性名稱和資料型態*/
 
 
-    public Person(String id, String name, Integer age) {
+    public Person(String id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -52,5 +52,15 @@ public class Person {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    public boolean isValid() {
+        boolean valid = true;
+
+        if (this.id.isEmpty() || this.name.isEmpty() || this.age == 0) {
+            valid = false;
+        }
+
+        return valid;
     }
 }
