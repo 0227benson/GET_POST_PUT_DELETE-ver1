@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class GetPostPutDelete2Application {
+public class GetPostPutDeletever1Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(GetPostPutDelete2Application.class, args);
+        SpringApplication.run(GetPostPutDeletever1Application.class, args);
     }
 
 
