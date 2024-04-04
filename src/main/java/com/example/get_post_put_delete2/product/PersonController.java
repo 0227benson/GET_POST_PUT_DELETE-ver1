@@ -7,32 +7,36 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(path = "api/project")/*URL Path*/
+@RequestMapping("api/project")/*URL Path*/
 public class PersonController {
 
-    private  final PersonService productService;
+    private static final PersonService PRODUCT_SERVICE = new PersonService();
 
-    @Autowired/*自動注入另一個Bean*/
-    public PersonController(PersonService productService) {/*將ProductService自動注入到ProductController*/
+    @GetMapping("/getProduct/{id}")/*傳入參數id*/
+    public ResponseEntity getPerson(@PathVariable String id) {
+        Get_Api_Response rsp = new Get_Api_Response();      //needs a formatted response
+        Person person = PRODUCT_SERVICE.getPerson(id);
 
-        this.productService = productService;
-    }
-
-    @GetMapping("/{id}")/*傳入參數id*/
-    public ResponseEntity<Person> getProduct(@PathVariable String id) {
-        Person product = productService.getProduct(id);
-        if (product != null) {
-            return ResponseEntity.ok(product);
+        if (person != null) {
+            rsp.SUCCESS();
+            rsp.setProduct(person);
         } else {
-            return ResponseEntity.notFound().build();
-        }/*根據傳入的參數id來獲取對應的產品資訊，如果有找到就回傳狀態碼200，如果沒找到就回傳404*/
+            rsp.FAIL();
+        }
+
+        return ResponseEntity.ok(rsp);
     }
 
-    @PostMapping
-    public ResponseEntity<Void> addProduct(@RequestBody Person product) {
-        productService.addProduct(product);
+    @PostMapping("/addProduct")
+    public ResponseEntity addPerson(@RequestBody Person person) {
+        Common_Response rsp = new Common_Response();
+        if (PRODUCT_SERVICE.addProduct(person)) {
+            rsp.SUCCESS();
+        } else {
+            rsp.BAD_PARAM();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).build();
-    }/*當成功添加後，回傳狀態碼201表示成功創建資源。*/
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateProduct(@PathVariable String id, @RequestBody Person updatedProduct) {
